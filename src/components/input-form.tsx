@@ -7,7 +7,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { Loader2, SendHorizonal } from "lucide-react";
 
 const inputSchema = z.object({
   input: z
@@ -35,7 +35,7 @@ const InputForm = () => {
 
   return (
     <form
-      className="flex items-end gap-5 w-full max-w-xl max-sm:flex-col"
+      className="flex items-start gap-5 w-full max-w-xl max-sm:flex-col"
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <FieldGroup>
@@ -44,12 +44,6 @@ const InputForm = () => {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel
-                htmlFor="input"
-                className="px-3"
-              >
-                News Headline
-              </FieldLabel>
               <Input
                 id="input"
                 {...field}
@@ -71,7 +65,7 @@ const InputForm = () => {
         {form.formState.isSubmitting ? (
           <Loader2 className="animate-spin" />
         ) : (
-          <ArrowRight />
+          <SendHorizonal />
         )}
       </Button>
     </form>
