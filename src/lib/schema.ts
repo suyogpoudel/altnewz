@@ -34,3 +34,5 @@ export const alternateTimelinesSchema = z.object({
     story: z.string().min(100),
   }),
 });
+
+export type AlternateTimelinesData = z.infer<typeof alternateTimelinesSchema>;
