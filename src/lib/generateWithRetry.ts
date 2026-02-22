@@ -3,7 +3,7 @@ import { mainPrompt } from "./mainPrompt";
 import { AlternateTimelinesData, alternateTimelinesSchema } from "./schema";
 import { google } from "@ai-sdk/google";
 
-const model = google("gemini-1.5-pro");
+const model = google("gemini-2.5-flash");
 
 export const generateWithRetry = async (
   prompt: string,
