@@ -1,13 +1,24 @@
-import { mainPrompt } from "@/lib/mainPrompt";
-import { generateText, Output } from "ai";
-import { google } from "@ai-sdk/google";
 import { NextResponse } from "next/server";
-import { alternateTimelinesSchema } from "@/lib/schema";
 import { generateWithRetry } from "@/lib/generateWithRetry";
+import { checkRateLimit } from "@/lib/rateLimiter";
 
 export async function POST(req: Request) {
-  let body;
+  const ip = req.headers.get("x-forwarded-for") || "unknown";
 
+  const rate = checkRateLimit(ip);
+  if (!rate.allowed) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: `Rate limit exceeded. Try again after ${rate.retryAfter} seconds`,
+      },
+      {
+        status: 429,
+      },
+    );
+  }
+
+  let body;
   try {
     body = await req.json();
   } catch (err) {
