@@ -59,6 +59,7 @@ const ResultDisplay = ({ headline }: ResultDisplayProps) => {
             setIsLoading(true);
             setRetryCount((c) => c + 1);
           }}
+          variant="destructive"
         >
           Try Again
         </Button>
