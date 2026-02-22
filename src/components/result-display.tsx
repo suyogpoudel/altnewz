@@ -16,6 +16,7 @@ const ResultDisplay = ({ headline }: ResultDisplayProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AlternateTimelinesData | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,13 +46,22 @@ const ResultDisplay = ({ headline }: ResultDisplayProps) => {
     };
 
     fetchData();
-  }, [headline]);
+  }, [headline, retryCount]);
 
   if (isLoading) return <LoadingScreen />;
   if (error)
     return (
-      <div className="flex items-center justify-center w-full h-full">
-        <p className="text-center text-destructive text-lg">{error}</p>
+      <div className="flex flex-col items-center justify-center w-full h-full gap-5">
+        <p className="text-center text-red-500 text-lg">{error}</p>
+        <Button
+          onClick={() => {
+            setError(null);
+            setIsLoading(true);
+            setRetryCount((c) => c + 1);
+          }}
+        >
+          Try Again
+        </Button>
       </div>
     );
 
@@ -61,7 +71,7 @@ const ResultDisplay = ({ headline }: ResultDisplayProps) => {
         {Object.entries(result!).map(([key, timeline]) => (
           <Card
             key={key}
-            className="last:col-span-full last:max-w-[50%] last:mx-auto"
+            className="last:col-span-full md:last:max-w-[50%] last:mx-auto"
           >
             <CardHeader className="text-primary text-xl font-mono font-semibold tracking-wider">
               {timeline.title}
