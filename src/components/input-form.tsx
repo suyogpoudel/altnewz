@@ -7,6 +7,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 const inputSchema = z.object({
   input: z
@@ -34,7 +35,7 @@ const InputForm = () => {
 
   return (
     <form
-      className="flex items-end gap-5 w-full max-w-xl"
+      className="flex items-end gap-5 w-full max-w-xl max-sm:flex-col"
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <FieldGroup>
@@ -66,7 +67,12 @@ const InputForm = () => {
         size="lg"
         disabled={form.formState.isSubmitting}
       >
-        Generate
+        <span className="max-sm:hidden">Generate </span>
+        {form.formState.isSubmitting ? (
+          <Loader2 className="animate-spin" />
+        ) : (
+          <ArrowRight />
+        )}
       </Button>
     </form>
   );
