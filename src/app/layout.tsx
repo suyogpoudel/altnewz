@@ -41,7 +41,7 @@ export default function RootLayout({
           <header>
             <Navbar />
           </header>
-          <main className="flex-1 flex justify-center items-center">
+          <main className="flex-1 flex justify-center items-center font-sans px-5">
             {children}
           </main>
 
