@@ -1,5 +1,4 @@
 import InputForm from "@/components/input-form";
-import LoadingScreen from "@/components/loading-screen";
 
 const Home = () => {
   return (
@@ -10,8 +9,7 @@ const Home = () => {
           <span className="tracking-widest text-primary">ALTNEWZ</span>
         </h1>
         <p className="text-lg text-muted-foreground">
-          Enter a news headline and get 5 wild new alternate timeline news
-          stories
+          One headline. Five alternate timelines.
         </p>
       </div>
 
